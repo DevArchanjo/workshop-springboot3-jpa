@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,9 +29,8 @@ public class User implements Serializable {
 	private String phone;
 	private String password;
 	
-	//Do lado do um para muitos podemos mapear também no JPA, é opcional caso queira acessar um objeto do 	tipo Usuário e acessar automaticamente os pedidos feitos por esse Usuário você pode também mapear do 	lado do um para muitos 1 - *
-	
-	@OneToMany(mappedBy = "client") //annotation um para muitos. Entre parenteses vamos colocar o nome do atributo que tem lá 	do outro lado da associação
+	@JsonIgnore
+	@OneToMany(mappedBy = "client")
 	private List<Order> orders = new ArrayList<>();
 	
 	public User() {

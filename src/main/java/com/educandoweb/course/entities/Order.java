@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,22 +22,18 @@ public class Order implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone ="GMT")
 	private Instant moment;
 	
-	//Agora precisamos implementar o relacionamento entre Pedido e Cliente para o JPA transformar isso em 	chaves estrangeiras la no banco de dado.
-	//Como fazer isso no JPA? Entendendo o que está acontecendo e qual o relacionamento entre as classes
-	//1 - Temos uma associação de muitos Pedidos para um cliente e um cliente tem muitos pedidos. O Pedido 	é o lado do muitos e o Usuário é o lado do um.
-	//Estando na classe pedido temos a relação muitos para um com o usuário(que é o atributo client)
-	
-	@ManyToOne //annotation muitos para um
-	@JoinColumn(name = "client_id")//entre parenteses vamos dar um nome para a chave estrangeira que liga Produtos à um cliente
+	@ManyToOne
+	@JoinColumn(name = "client_id")
 	private User client;
 	
 	public Order() {
 	}
 
 	public Order(Integer id, Instant moment, User client) {
-		super();
 		this.id = id;
 		this.moment = moment;
 		this.client = client;
