@@ -37,7 +37,7 @@ public class TestConfig implements CommandLineRunner {
 	private ProductRepository productRepository;
 	
 	@Autowired
-	private OrderItemRepository orderItemRepository;//
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
