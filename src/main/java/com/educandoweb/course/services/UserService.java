@@ -53,7 +53,6 @@ public class UserService {
 			return repository.save(entity);
 		}
 		catch (EntityNotFoundException e) {
-			e.printStackTrace();
 			throw new ResourceNotFoundException(id);
 		}
 	}
